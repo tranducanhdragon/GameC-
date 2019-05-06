@@ -27,6 +27,33 @@ void DoiTuongChinh::HandleInputAction(SDL_Event events, Mix_Chunk* bullet_sound[
 		    case SDLK_LEFT:
 			    x_val_ -= WIDTH_MAIN_OBJECT/SPEED_MAIN_OBJECT;
 			    break;
+			case SDLK_LSHIFT:{
+				Dan* p_amo = new Dan();
+				p_amo->SetWidthHeight(WIDTH_LAZER, HEIGHT_LAZER);
+				p_amo->LoadImg(g_name_bullet_main_lazer);
+				p_amo->set_type(Dan::LAZER);
+				Mix_PlayChannel(-1, bullet_sound[0], 0);
+				p_amo->SetRect(this->rect_.x + this->rect_.w - 20, this->rect_.y + this->rect_.h - 70);
+				/*		p_amo->SetRect(this->rect_.x + this->rect_.w - 70, this->rect_.y + this->rect_.h - 70);*/
+				p_amo->set_is_move(true);
+				p_amo->set_y_val(SPEED_BULLET_MAIN);
+				p_amo_list_.push_back(p_amo);					
+			}
+			break;
+			case SDLK_SPACE:{
+				Dan* p_amo = new Dan();
+				p_amo->SetWidthHeight(WIDTH_SPHERE, HEIGHT_SPHERE);
+				p_amo->LoadImg(g_name_bullet_main_sphere);
+				p_amo->set_type(Dan::SPHERE);
+				Mix_PlayChannel(-1, bullet_sound[1], 0);
+				p_amo->SetRect(this->rect_.x + this->rect_.w - 20, this->rect_.y + this->rect_.h - 70);
+				/*		p_amo->SetRect(this->rect_.x + this->rect_.w - 70, this->rect_.y + this->rect_.h - 70);*/
+				p_amo->set_is_move(true);
+				p_amo->set_y_val(SPEED_BULLET_MAIN);
+				p_amo_list_.push_back(p_amo);
+			}
+			break;
+
 		    default:
 			    break;
 		}
@@ -69,27 +96,6 @@ void DoiTuongChinh::HandleInputAction(SDL_Event events, Mix_Chunk* bullet_sound[
 	}
 	else if(events.type == SDL_MOUSEBUTTONUP){
 
-	}
-	else if(events.type == SDL_KEYDOWN){
-		Dan* p_amo = new Dan();
-		if(events.key.keysym.sym == SDLK_LSHIFT){
-			p_amo->SetWidthHeight(WIDTH_LAZER, HEIGHT_LAZER);
-			p_amo->LoadImg(g_name_bullet_main_lazer);
-			p_amo->set_type(Dan::LAZER);
-			Mix_PlayChannel(-1, bullet_sound[0], 0);
-		}	
-		else if(events.key.keysym.sym == SDLK_BACKSPACE){
-			p_amo->SetWidthHeight(WIDTH_SPHERE, HEIGHT_SPHERE);
-			p_amo->LoadImg(g_name_bullet_main_sphere);
-			p_amo->set_type(Dan::SPHERE);
-			Mix_PlayChannel(-1, bullet_sound[1], 0);
-		}
-		
-		p_amo->SetRect(this->rect_.x + this->rect_.w - 20, this->rect_.y + this->rect_.h - 70);
-		/*		p_amo->SetRect(this->rect_.x + this->rect_.w - 70, this->rect_.y + this->rect_.h - 70);*/
-		p_amo->set_is_move(true);
-		p_amo->set_y_val(SPEED_BULLET_MAIN);
-		p_amo_list_.push_back(p_amo);
 	}
 	else{
 
